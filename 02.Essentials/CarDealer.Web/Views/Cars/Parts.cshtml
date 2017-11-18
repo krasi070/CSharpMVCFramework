@@ -1,0 +1,14 @@
+﻿@using CarDealer.Services.Models.Cars
+@model CarWithPartsModel
+
+<h2>Details</h2>
+<h3>@Model.Make @Model.Model</h3>
+<p>
+    Travelled Distance: @(Model.TravelledDistance / 1000) km
+</p>
+<ul>
+    @foreach (var part in Model.Parts)
+    {
+        <li>@part.Name - $@part.Price.ToString("F2")</li>
+    }
+</ul>

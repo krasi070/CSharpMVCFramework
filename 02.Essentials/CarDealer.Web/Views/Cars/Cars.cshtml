@@ -1,0 +1,39 @@
+﻿@using CarDealer.Services.Models.Cars
+@model IEnumerable<CarModel>
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Make
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Travelled Distance
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>
+                    @car.Make
+                </td>
+                <td>
+                    @car.Model
+                </td>
+                <td>
+                    @(car.TravelledDistance / 1000) km
+                </td>
+                <td>
+                    <a class="btn btn-small btn-default" href="/cars/@car.Id/parts">More Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

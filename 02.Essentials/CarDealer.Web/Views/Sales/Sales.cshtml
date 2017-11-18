@@ -1,0 +1,45 @@
+﻿@using CarDealer.Services.Models.Sales
+@model IEnumerable<SaleListModel>
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Customer
+            </th>
+            <th>
+                Discount
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Discounted Price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model)
+        {
+            <tr>
+                <td>
+                    @sale.CustomerName
+                </td>
+                <td>
+                    @(sale.Discount * 100)%@(sale.IsYoungDriver ? " + 5%" : "")
+                </td>
+                <td>
+                    $@sale.Price.ToString("F2")
+                </td>
+                <td>
+                    $@sale.DiscountedPrice.ToString("F2")
+                </td>
+                <td>
+                    <a class="btn btn-small btn-default" href="/sales/@sale.Id">More Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
