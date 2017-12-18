@@ -34,6 +34,9 @@
                 <td>
                     @(customer.IsYoungDriver ? "Yes": "No")
                 </td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/customers/edit/@customer.Id">Edit</a>
+                </td>
             </tr>
         }
     </tbody>

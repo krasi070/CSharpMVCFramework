@@ -17,6 +17,7 @@
 
         public IEnumerable<SaleListModel> All()
             => this.db.Sales
+                .OrderByDescending(s => s.Id)
                 .Select(s => new SaleListModel()
                 {
                     Id = s.Id,
@@ -29,29 +30,31 @@
 
         public IEnumerable<SaleListModel> Discounted()
             => this.db.Sales
-                    .Where(s => s.Discount > 0)
-                    .Select(s => new SaleListModel()
-                    {
-                        Id = s.Id,
-                        CustomerName = s.Customer.Name,
-                        Price = s.Car.Parts.Sum(p => p.Part.Price),
-                        IsYoungDriver = s.Customer.IsYoungDriver,
-                        Discount = s.Discount
-                    })
-                    .ToList();
+                .Where(s => s.Discount > 0)
+                .OrderByDescending(s => s.Id)
+                .Select(s => new SaleListModel()
+                {
+                    Id = s.Id,
+                    CustomerName = s.Customer.Name,
+                    Price = s.Car.Parts.Sum(p => p.Part.Price),
+                    IsYoungDriver = s.Customer.IsYoungDriver,
+                    Discount = s.Discount
+                })
+                .ToList();
 
         public IEnumerable<SaleListModel> DiscountedByPercent(int percent)
             => this.db.Sales
-                    .Where(s => s.Discount == (double)percent / 100)
-                    .Select(s => new SaleListModel()
-                    {
-                        Id = s.Id,
-                        CustomerName = s.Customer.Name,
-                        Price = s.Car.Parts.Sum(p => p.Part.Price),
-                        IsYoungDriver = s.Customer.IsYoungDriver,
-                        Discount = s.Discount
-                    })
-                    .ToList();
+                .OrderByDescending(s => s.Id)
+                .Where(s => s.Discount == (double)percent / 100)
+                .Select(s => new SaleListModel()
+                {
+                    Id = s.Id,
+                    CustomerName = s.Customer.Name,
+                    Price = s.Car.Parts.Sum(p => p.Part.Price),
+                    IsYoungDriver = s.Customer.IsYoungDriver,
+                    Discount = s.Discount
+                })
+                .ToList();
 
         public SaleDetailsModel Details(int id)
             => this.db.Sales

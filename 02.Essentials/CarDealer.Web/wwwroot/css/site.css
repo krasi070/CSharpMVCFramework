@@ -26,6 +26,15 @@
     margin: 15px;
 }
 
+a.disabled {
+    color: grey;
+    pointer-events: none;
+}
+
+.parts-select {
+    height: 300px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
